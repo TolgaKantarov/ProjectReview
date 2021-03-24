@@ -9,7 +9,7 @@
                 <div class="container">
                     <h2 class="display-5">Welcome to ProjectReview!</h2>
                     <p>You can submit your projects for review or you can review other developers projects.</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Submit project »</a></p>
+                    <p><a class="btn btn-primary btn-lg" href="{{route('submit.project')}}" role="button">Submit project »</a></p>
                 </div>
             </div>
         </div>
@@ -21,31 +21,30 @@
                 <h3>Recently submitted projects</h3>
             </div>
 
-                <div class="col-lg-12 mb-3">
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <a href="#" class="link-unstyled text-primary">How many projects can I have?</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#" class="link-unstyled text-primary">Are there technical requirements for this?</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#" class="link-unstyled text-primary">Where do I update a project info?</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#" class="link-unstyled text-primary">How do I cancel a project?</a>
-                            </li>
-                        </ul>
-                    </div><!-- /.card -->
+            <div class="col-lg-12 mb-3">
 
+                @forelse ($projects as $project)
+
+                        <div class="card mb-2">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="{{ route('view.project', $project) }}" class="link-unstyled text-primary">{{$project->title}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                @empty
+                <p>No submitted projects yet!</p>
+                @endforelse
+
+                @if ($projects)
                     <div class="d-flex float-right my-3">
                         <a href="#">View all</a>
                     </div>
-                </div>
+                    @endif
+            </div>
 
-            </div><!-- /.row -->
-        </div><!-- /.container -->
+            </div>
+        </div>
     </div>
 
 </div>
