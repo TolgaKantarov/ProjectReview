@@ -56,8 +56,16 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <a href="{{ route('view.project', $project) }}" class="btn btn-outline-primary">View</a>
-                            <a href="#" class="btn btn-outline-warning"><i class="far my-1 fa-star"></i></a>
+                            <div class="d-inline p-2">
+                                <a href="{{ route('view.project', $project) }}" class="btn btn-outline-primary">View</a>
+                                @auth
+                                    @if ($project->user != auth()->user())
+                                        @livewire('favourite-project', ['project' => $project])
+                                    @else
+                                        <button class="btn btn-outline-warning" disabled><i class="fas my-1 fa-star"></i> {{$project->favourites()->count()}}</button>
+                                    @endif
+                                @endauth
+                            </div>
                         </td>
                     </tr>
 
@@ -79,5 +87,32 @@
 
             </div>
         </div>
+
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            window.addEventListener('favourited', event => {
+                toastr.info('Added to favourites');
+            })
+
+            window.addEventListener('unfavourited', event => {
+                toastr.info('Removed from favourites');
+            })
+        </script>
 
 @endsection

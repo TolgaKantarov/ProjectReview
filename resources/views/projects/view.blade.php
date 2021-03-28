@@ -51,7 +51,7 @@
                                 <div class="card-body">
                                     <div class="media">
                                         <div class="media-body">
-                                            <p><b>Tolga Kantarov</b></p>
+                                            <a href="#"><b>Tolga Kantarov</b></a>
                                             <p class="mt-3 mb-2">Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Phasellus nec sem in justo pellentesque facilisis.</p>
                                             <time class="timeago text-muted" datetime="2017-11-20 20:00" data-tid="3">3 years ago</time>
                                             <a class="float-right" href="#"><span class="far fa-comment"></span> Reply</a>
