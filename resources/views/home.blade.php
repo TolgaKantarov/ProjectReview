@@ -24,11 +24,13 @@
             <div class="col-lg-12 mb-3">
 
                 @forelse ($projects as $project)
-
                         <div class="card mb-2">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <a href="{{ route('view.project', $project) }}" class="link-unstyled text-primary">{{$project->title}}</a>
+                                    @if ($project->user == auth()->user())
+                                        <small class="text-success">(Your project)</small>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -38,9 +40,9 @@
 
                 @if ($projects)
                     <div class="d-flex float-right my-3">
-                        <a href="#">View all</a>
+                        <a href="{{ route('projects') }}">View all</a>
                     </div>
-                    @endif
+                @endif
             </div>
 
             </div>

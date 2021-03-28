@@ -3,13 +3,36 @@
 @section('content')
 
             <div class="container">
+
                 <div class="row mt-4">
                     <div class="col-md-10 mx-auto">
+
+                        @if (session('success_msg'))
+                            <div class="alert alert-success">
+                                {{ session('success_msg') }}
+                            </div>
+                        @endif
+
                         <article class="mb-6">
                             <h1 class="h2">{{$project->title}}</h1>
 
                             <small>Submitted by: <a href="#">{{$project->user->name}}</a></small><br>
                             <small>Published: {{$project->created_at->diffForHumans()}}, Last updated: {{$project->updated_at->diffForHumans()}}</small>
+
+                            @can('update', $project)
+                                <div class="mt-2">
+
+                                    <a class="btn btn-sm btn-primary" href="{{ route('edit.project', $project) }}">Edit</a>
+                                    <a class="btn btn-sm btn-danger" onclick="deleteProject()">Delete</a>
+
+                                    <form action="{{ route('delete.project', $project) }}" method="POST" id="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+
+                                </div>
+                            @endcan
+
                             <hr>
 
                             @if ($project->description)
@@ -79,6 +102,20 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.open("{{$project->link}}");
+                }
+            })
+        }
+
+        function deleteProject() {
+            Swal.fire({
+                title: 'Warning!',
+                html: 'Are you sure you want to delete this project?' ,
+                icon: 'error',
+                confirmButtonText: 'Delete project',
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#delete-form").submit();
                 }
             })
         }

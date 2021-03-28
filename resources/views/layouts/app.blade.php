@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.tiny.cloud/1/2pkcqnyjxxd1b4ll6edsuxyy3v7djrusw1nityhrt4ea57w2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -22,14 +23,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://robust.bootlab.io/css/app.css" rel="stylesheet">
 
-    <script>
-        tinymce.init({
-            selector: 'textarea',  // change this value according to your HTML
-            plugin: 'a_tinymce_plugin',
-            a_plugin_option: true,
-            a_configuration_option: 400
-        });
-    </script>
 </head>
 <body>
     <div id="app">
@@ -52,7 +45,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="">My projects</a>
+                                <a class="nav-link" href="{{ route('my.projects') }}">My projects</a>
                             </li>
                         </ul>
                     @endauth
@@ -100,6 +93,7 @@
             @yield('content')
         </main>
     </div>
+
 
 </body>
 </html>

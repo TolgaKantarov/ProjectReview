@@ -20,7 +20,8 @@
                                             <div class="form-group">
                                                 <label for="title">Project title:</label>
 
-                                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}"  autofocus>
+                                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror"
+                                                       name="title" value="{{ old('title') }}" required autofocus>
 
                                                 @error('title')
                                                 <span class="invalid-feedback" role="alert">
@@ -35,7 +36,7 @@
                                                 <textarea id="editor" rows="6" placeholder="Write a description of the project or any
                                                 specific areas/topics/questions you want to be reviewed.."
                                                           class="form-control @error('description') is-invalid @enderror"
-                                                          name="description" value="{{ old('description') }}"  autofocus>
+                                                          name="description" value="{{ old('description') }}" required autofocus>
                                                 </textarea>
 
                                                 @error('description')
@@ -48,7 +49,8 @@
                                             <div class="form-group">
                                                 <label for="link">Github repository URL:</label>
 
-                                                <input type="url" class="form-control @error('link') is-invalid @enderror" name="link" value="{{ old('link') }}"  autofocus>
+                                                <input type="url" class="form-control @error('link') is-invalid @enderror" name="link"
+                                                       value="{{ old('link') }}" required autofocus>
 
                                                 @error('link')
                                                 <span class="invalid-feedback" role="alert">
@@ -82,6 +84,16 @@
 
     <script>
 
+        $('document').ready(function() {
+
+            tinymce.init({
+                selector: 'textarea',  // change this value according to your HTML
+                plugin: 'a_tinymce_plugin',
+                a_plugin_option: true,
+                a_configuration_option: 400
+            });
+
+        });
 
     </script>
 
